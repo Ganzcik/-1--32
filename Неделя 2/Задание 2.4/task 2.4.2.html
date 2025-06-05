@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <style>
+            nav {
+                height: 45px;
+                border-top: 2px solid blueviolet;
+                border-bottom: 2px solid blueviolet;
+                text-align: center;
+            }
+            nav a {
+                text-decoration: none;
+                font-size: 30px;
+                padding-left: 80px;
+                padding-right: 80px;
+                padding-top: 10px;
+            }
+
+            .posts {
+                width: 1000px;
+                height: 450px;
+                display: flex;
+                justify-content: center;
+                margin: 0 auto;
+                gap: 20px;
+            }
+
+            .column {
+                width: 250px;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            h1 {
+                text-align: center;
+                color: black;
+                font-size: 50px;
+            }
+
+            .column h2 {
+                background-color: aqua;
+                padding: 8px 12px;
+                color: purple;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            
+            body {
+                display: flex;
+                flex-direction: column;
+
+            }
+            
+
+            footer {
+                background-color: #8fddf2;
+                padding: 5px;
+                margin-top: 100px;
+                position: relative;
+            }
+
+            footer p {
+                background-color: white;
+                padding: 5px;
+
+            }
+        </style>
+    </head>
+
+    <body>
+        <img src="https://habrastorage.org/webt/vw/0r/cr/vw0rcrth9wlfjerwlcn7w5i7hlc.png" width="150">
+        <nav>
+            <a href="">Новости</a>
+            <a href="">Конкурс</a>
+            <a href="">Планы развития</a>
+        </nav>
+        <main>
+            <h1>Pixel Design</h1>
+            <div class="posts">
+                <div class="column">
+                    <h2>Наши последние новости</h2>
+                    <p>В нашей студии новый дизайнер: пиксель Cube. Именно он будет выполнять ваши заказы по трёхмерной графике. Увлекается ладшафтным и интерьерным дизайном. Недавно он давал интервью газете <em>Progress news.</em></p>
+                    <img src="https://avatars.mds.yandex.net/i?id=3ef6ab23df0ff72f0318dd5108d5ac753ce8f811-10142557-images-thumbs&n=13" width="240">
+                </div>
+                
+                <div class="column">
+                    <h2>Готовимся к конкурсу</h2>
+                    <p>Весной следующего года мы участвуем в конкурсе дизайна. Наши работы будут представлены в направлениях: <em>веб-дизайн, полиграфический дизайн, дизайн интерьеров.</em> По каждому направлению мы собираемся представить несколько работ, которые пройдут предварительный отбор в нашей студии.</p>
+                    <img src="https://avatars.mds.yandex.net/i?id=5e7bf23f5141dafcccad41366d047de2c2da681a-4667953-images-thumbs&n=13" width="180">
+                </div>
+                
+                <div class="column">
+                    <h2>Планы развития</h2>
+                    <p>В этом месяце мы готовим годовое планирование нашей работы. Кроме того, что мы принимаем и выполняем клиентские заказы по дизайну, мы участвуем в конкурсах, учимся на онлайн курсах, повышающих наше мастерство, просматриваем сборники лучших работ, которые можно найти в Интернете.</p>
+                    <img src="https://avatars.mds.yandex.net/i?id=c58805ab4cf58c19204171c85b5247c5-5542693-images-thumbs&n=13" width="100">
+                </div>
+            </div>
+        </main>
+        <footer>
+			<p><span style="font-weight: bold; font-style: italic;">Контакты</span></p>
+			<p>Адрес: г. Техноград, ул. Дисплейная, 15</p>
+			<p>Тел.: 8895-6341</p>
+		</footer>
+    </body>
+</html>

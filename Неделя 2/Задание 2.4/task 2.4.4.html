@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .container {
+                width: 870px;
+                margin: 0 auto;
+            }
+            
+            .main-info {
+                float: left;
+                width: 400px;
+            }
+            
+            .advertisement {
+                float: right;
+                width: 350px;
+                margin-top: 90px;
+                padding: 30px;
+                border: 2px dotted navy;
+            }
+            
+            .husky-photos {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+            
+            .husky-photos img {
+                border-radius: 8px;
+                border: 2px solid #1e88e5;
+            }
+            
+            .reviews {
+                width: 870px;
+                float: left;
+                margin-left: 30px;
+                clear: both;
+                margin-top: 20px;
+            }
+            
+            .review {
+                border-left: 10px double navy;
+                width: 350px;
+                padding-left: 10px;
+                margin-bottom: 20px;
+            }
+            
+            .reviewer-name {
+                color: firebrick;
+                border-bottom: 1px dotted firebrick;
+                display: inline-block;
+                padding-bottom: 2px;
+                margin-bottom: 5px;
+            }
+            .main-info h1 {
+                color: purple
+            }
+            .main-info h2 {
+                color: indigo;
+                font-size: 20px;
+            }
+            .main-info p {
+                font-size: 20px;
+            }
+            .advertisement h2 {
+                color: indigo;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <section class="main-info">
+                <h1>Зоопарк редких животных</h1>
+                <h2>Более 150 видов</h2>
+                <p>Вы увидите крупных диких представителей живой природы, а также редких птиц, змей и многое другое!</p>
+                <img src="https://avatars.mds.yandex.net/i?id=cb5466b8234a2db804b707db4ad4ff11_l-5228318-images-thumbs&n=13" width="400" alt="Зоопарк редких животных">
+            </section>
+            
+            <div class="advertisement">
+                <h2>Внимание! Специальное предложение от партнёра!</h2>
+                <p><a href="">Щенки хаски</a> от заводчика со всеми документами</p>
+                <div class="husky-photos">
+                    <img src="https://sobakovod.club/uploads/posts/2021-11/1636686429_1-sobakovod-club-p-sobaki-vzroslii-khaski-1.jpg" width="150" alt="Щенок хаски" title="Настоящий щенок хаски">
+                    <img src="https://i.pinimg.com/736x/c1/a0/80/c1a080c7d466c8f39cfddb2faac847b2.jpg" width="150" alt="Взрослая хаски" title="Настоящая взрослая хаски">
+                </div>
+            </div>
+            
+            <div class="reviews">
+                <div class="review">
+                    <div class="reviewer-name">Олег</div>
+                    <p>Были в серпентарии. Ребёнок в восторге!</p>
+                </div>
+                
+                <div class="review">
+                    <div class="reviewer-name">Наталья</div>
+                    <p>Спасибо за экскурсию! Очень интересно!</p>
+                </div>
+                
+                <div class="review">
+                    <div class="reviewer-name">Анна</div>
+                    <p>Так и не попали к птицам. жаль… Однако, остальное очень здорово!</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
