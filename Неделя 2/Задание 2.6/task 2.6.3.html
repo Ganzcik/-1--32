@@ -1,0 +1,145 @@
+<html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0 20px;
+            }
+
+            nav {
+                text-align: right;
+                padding: 25px 20px;
+                height: 30px;
+                border-bottom: 1px dashed black;
+                background: linear-gradient(to bottom, lightblue, white);
+                margin: 0 -20px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+
+            nav a {
+                margin: 0 30px;
+                text-decoration: none;
+                color: purple;
+            }
+
+            h1 {
+                font-size: 40px;
+                text-align: center;
+                margin: 40px 0 25px;
+            }
+
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .text {
+                width: 300px;
+            }
+
+            .text p {
+                color: lightblue;
+                font-size: 35px;
+            }
+
+            .text em {
+                display: block;
+                text-align: right;
+            }
+
+            .text p:hover {
+                font-size: 45px;
+                color: navy;
+            }
+
+            .text .right:hover {
+                color: darkorange;
+            }
+
+            .gallery {
+                display: flex;
+                flex-wrap: wrap;
+                width: 500px;
+                gap: 0;
+                margin: 0;
+                padding: 0;
+            }
+
+            .image-wrapper {
+                width: 166.666px;
+                height: 250px;
+                position: relative;
+                overflow: visible;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .image-wrapper img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                opacity: 0.5;
+                transition: all 0.5s ease-out;
+                box-sizing: border-box;
+                transform-origin: left top;
+            }
+
+            .image-wrapper:hover img {
+                opacity: 1;
+                padding: 5px;
+                border: 6px solid navy;
+                z-index: 10;
+                background: white;
+                transform: scale(1.1);
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <a href="#">Сезонные акции</a>
+            <a href="#">Контакты</a>
+        </nav>
+        <h1>Горные экскурсии</h1>
+        <div class="container">
+            <div class="gallery">
+                <div class="image-wrapper">
+                    <img src="https://i.pinimg.com/originals/e9/a8/8e/e9a88e996fe2e024e2e6200a76506ee3.jpg">
+                </div>
+                <div class="image-wrapper">
+                    <img src="https://i.pinimg.com/originals/b8/5d/18/b85d1825cb4d406cbf97e804e0f33cb4.jpg">
+                </div>
+                <div class="image-wrapper">
+                    <img src="https://avatars.mds.yandex.net/i?id=59c5d90669ca762314b77abfc4fc6af7_l-5284430-images-thumbs&n=13">
+                </div>
+                <div class="image-wrapper">
+                    <img src="https://avatars.mds.yandex.net/i?id=9611f688cc0f4d15694a51da13b7434f_l-5268986-images-thumbs&n=13">
+                </div>
+                <div class="image-wrapper">
+                    <img src="https://i.pinimg.com/736x/8c/8d/d2/8c8dd2f885c6da56ee40b9e132bf37db.jpg">
+                </div>
+                <div class="image-wrapper">
+                    <img src="https://avatars.mds.yandex.net/i?id=fd8ebcf7b1c56d429d1e8a5d1fa6e009_l-7451251-images-thumbs&n=13">
+                </div>
+            </div>
+            <div class="text">
+                <p>Только</p>
+                <p><em class="right">горы!</em></p>
+                <p>Только</p>
+                <p><em class="right">вперёд!</em></p>
+            </div>
+        </div>
+    </body>
+</html>
