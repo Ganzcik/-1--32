@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Галактика семьи</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-blue: #0a1a2e;
+            --deep-space: #061a33;
+            --cosmic-purple: #4e2a84;
+            --star-yellow: #ffb347;
+            --nebula-pink: #ff6b6b;
+            --milky-white: #f8f9fa;
+            --comet-gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--space-blue);
+            color: var(--milky-white);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(78, 42, 132, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 179, 71, 0.15) 0%, transparent 20%);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--star-yellow);
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: rgba(10, 26, 46, 0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 179, 71, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: 50px;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--milky-white);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .logo-text span {
+            color: var(--star-yellow);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav ul li a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--star-yellow);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* Основное содержимое */
+        .account-section {
+            padding: 60px 0;
+            flex: 1;
+        }
+        
+        .account-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .account-title {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: var(--milky-white);
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+        }
+        
+        .account-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--star-yellow), var(--nebula-pink));
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        .profile-card, .booking-form, .bookings-list {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(10, 26, 46, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 179, 71, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(78, 42, 132, 0.3);
+            margin-right: 20px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: var(--star-yellow);
+            border: 2px solid var(--star-yellow);
+        }
+        
+        .profile-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--milky-white);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .profile-info p {
+            color: rgba(248, 249, 250, 0.7);
+        }
+        
+        .profile-details {
+            margin-top: 20px;
+        }
+        
+        .detail-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 179, 71, 0.1);
+        }
+        
+        .detail-label {
+            color: var(--star-yellow);
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .detail-value {
+            font-size: 16px;
+            color: rgba(248, 249, 250, 0.9);
+        }
+        
+        .logout-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, var(--nebula-pink), #dc3545);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+        
+        .logout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+        }
+        
+        .form-title, .bookings-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--milky-white);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--star-yellow);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+        }
+        
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(10, 26, 46, 0.5);
+            border: 1px solid rgba(255, 179, 71, 0.3);
+            border-radius: 5px;
+            color: var(--milky-white);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--star-yellow);
+            box-shadow: 0 0 10px rgba(255, 179, 71, 0.2);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--star-yellow), var(--nebula-pink));
+            color: var(--space-blue);
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(255, 179, 71, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 179, 71, 0.4);
+        }
+        
+        .booking-item {
+            background: rgba(10, 26, 46, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border: 1px solid rgba(255, 179, 71, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .booking-item:hover {
+            border-color: rgba(255, 179, 71, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .booking-info {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .booking-name {
+            font-size: 18px;
+            color: var(--milky-white);
+            margin-bottom: 5px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .booking-meta {
+            color: rgba(248, 249, 250, 0.7);
+            font-size: 14px;
+        }
+        
+        .booking-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .cancel-btn {
+            background: linear-gradient(135deg, var(--nebula-pink), #dc3545);
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+        }
+        
+        .cancel-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(220, 53, 69, 0.4);
+        }
+        
+        /* Подвал сайта */
+        footer {
+            background-color: var(--deep-space);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 179, 71, 0.1);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+        
+        .footer-logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            color: var(--milky-white);
+        }
+        
+        .footer-contact {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-contact i {
+            color: var(--star-yellow);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .footer-links h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--milky-white);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(248, 249, 250, 0.7);
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--star-yellow);
+        }
+        
+        .footer-links a i {
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(248, 249, 250, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .account-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--star-yellow);
+                font-size: 24px;
+                cursor: pointer;
+            }
+            
+            .account-container {
+                flex-direction: column;
+            }
+            
+            .profile-card, .booking-form {
+                min-width: 100%;
+            }
+            
+            .booking-item {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .booking-actions {
+                justify-content: flex-end;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .account-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909553.png" alt="Логотип Галактика семьи">
+                    <div class="logo-text">ГАЛАКТИКА <span>СЕМЬИ</span></div>
+                </div>
+                <nav>
+                    <button class="menu-toggle">☰</button>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="account.html">Личный кабинет</a></li>
+                        <li><a href="schedule.html">Расписание</a></li>
+                        <li><a href="competition.html">Конкурсы</a></li>
+                        <li><a href="#" class="logout-btn-mobile">Выйти</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="account-section">
+        <div class="container">
+            <h1 class="account-title">Личный кабинет</h1>
+            
+            <div class="account-container">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar" style="background-image: url('https://cdn-icons-png.flaticon.com/512/3135/3135715.png');">
+                        </div>
+                        <div class="profile-info">
+                            <h3>Иван Павлович</h3>
+                            <p>Участник мероприятий</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value">Epanchintsev@Ivan.com</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Телефон</div>
+                            <div class="detail-value">+7 (238) 504-22-05</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Дата регистрации</div>
+                            <div class="detail-value">15.05.2024</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Участий в мероприятиях</div>
+                            <div class="detail-value">3</div>
+                        </div>
+                        
+                        <a href="#" class="logout-btn">Выйти из аккаунта</a>
+                    </div>
+                </div>
+                
+                <div class="booking-form">
+                    <h2 class="form-title">Запись на мероприятие</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="competition" class="form-label">Мероприятие*</label>
+                            <select id="competition" class="form-select" required>
+                                <option value="">Выберите мероприятие</option>
+                                <option value="1">Творческая мастерская</option>
+                                <option value="2">Семейный квест</option>
+                                <option value="3">Научные эксперименты</option>
+                                <option value="4">Танцевальный баттл</option>
+                                <option value="5">Кулинарный мастер-класс</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date" class="form-label">Дата*</label>
+                            <input type="text" id="date" class="form-input" value="8 июля 2025" readonly>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="time" class="form-label">Время*</label>
+                                <select id="time" class="form-select" required>
+                                    <option value="">Выберите время</option>
+                                    <option value="9:00">9:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="16:00">16:00</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="people" class="form-label">Количество человек*</label>
+                                <input type="number" id="people" class="form-input" min="1" max="10" value="1" required>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Записаться</button>
+                    </form>
+                </div>
+                
+                <div class="bookings-list">
+                    <h2 class="bookings-title">Мои записи</h2>
+                    
+                    <div class="booking-item">
+                        <div class="booking-info">
+                            <div class="booking-name">Творческая мастерская</div>
+                            <div class="booking-meta">8 июля 2025, 11:00 • 2 участника</div>
+                        </div>
+                        <div class="booking-actions">
+                            <button class="cancel-btn">Отменить</button>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-item">
+                        <div class="booking-info">
+                            <div class="booking-name">Семейный квест</div>
+                            <div class="booking-meta">8 июля 2025, 14:00 • 3 участника</div>
+                        </div>
+                        <div class="booking-actions">
+                            <button class="cancel-btn">Отменить</button>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-item">
+                        <div class="booking-info">
+                            <div class="booking-name">Научные эксперименты</div>
+                            <div class="booking-meta">8 июля 2025, 16:00 • 1 участник</div>
+                        </div>
+                        <div class="booking-actions">
+                            <button class="cancel-btn">Отменить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2909/2909553.png" alt="Логотип Галактика семьи">
+                        <div class="footer-logo-text">ГАЛАКТИКА СЕМЬИ</div>
+                    </div>
+                    <div class="footer-contact">
+                        <i>📞</i> <a href="tel:+74842234567">+7 (484) 223-45-67</a>
+                    </div>
+                    <div class="footer-contact">
+                        <i>✉️</i> <a href="mailto:info@galaxy-family.ru">info@galaxy-family.ru</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html"><i>🏠</i> Главная</a></li>
+                        <li><a href="account.html"><i>👤</i> Личный кабинет</a></li>
+                        <li><a href="registration.html"><i>📝</i> Регистрация</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Мероприятия</h3>
+                    <ul>
+                        <li><a href="schedule.html"><i>📅</i> Расписание</a></li>
+                        <li><a href="competition.html"><i>🏆</i> Конкурсы</a></li>
+                        <li><a href="404.html"><i>❓</i> Помощь</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Галактика семьи. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            const nav = document.querySelector('nav ul');
+            nav.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

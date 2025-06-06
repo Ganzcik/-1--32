@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание конкурсов | Галактика семьи</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-blue: #0a1a2e;
+            --deep-space: #061a33;
+            --cosmic-purple: #4e2a84;
+            --star-yellow: #ffb347;
+            --nebula-pink: #ff6b6b;
+            --milky-white: #f8f9fa;
+            --comet-gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--space-blue);
+            color: var(--milky-white);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(78, 42, 132, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 179, 71, 0.15) 0%, transparent 20%);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--star-yellow);
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: rgba(10, 26, 46, 0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 179, 71, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: 50px;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--milky-white);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .logo-text span {
+            color: var(--star-yellow);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav ul li a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--star-yellow);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* Герой-секция */
+        .hero {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+        
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            background: linear-gradient(90deg, #ffb347, #ffcc33);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 179, 71, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: rgba(248, 249, 250, 0.8);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Основное содержимое */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--milky-white);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--star-yellow), var(--nebula-pink));
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        /* Легенда */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        
+        .legend-color.free {
+            background-color: #03dac6;
+        }
+        
+        .legend-color.low {
+            background-color: var(--star-yellow);
+        }
+        
+        .legend-color.full {
+            background-color: var(--nebula-pink);
+        }
+        
+        /* Таблица расписания */
+        .schedule-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 40px;
+            background: rgba(10, 26, 46, 0.7);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 179, 71, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        
+        .schedule-table th {
+            background-color: rgba(78, 42, 132, 0.5);
+            color: var(--milky-white);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 179, 71, 0.3);
+        }
+        
+        .schedule-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 179, 71, 0.1);
+            height: 80px;
+        }
+        
+        .time-slot {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            color: var(--star-yellow);
+            white-space: nowrap;
+        }
+        
+        .competition-cell {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .competition-cell:hover {
+            background: rgba(255, 179, 71, 0.1);
+        }
+        
+        .competition-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 5px;
+        }
+        
+        .competition-name {
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .places-available {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+        }
+        
+        .places-available.free {
+            background-color: #03dac6;
+            color: var(--space-blue);
+        }
+        
+        .places-available.low {
+            background-color: var(--star-yellow);
+            color: var(--space-blue);
+        }
+        
+        .places-available.full {
+            background-color: var(--nebula-pink);
+            color: var(--milky-white);
+        }
+        
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--star-yellow), var(--nebula-pink));
+            color: var(--space-blue);
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 179, 71, 0.3);
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 179, 71, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--star-yellow);
+            color: var(--star-yellow);
+        }
+        
+        .btn-outline:hover {
+            background: var(--star-yellow);
+            color: var(--space-blue);
+        }
+        
+        /* Подвал сайта */
+        footer {
+            background-color: var(--deep-space);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 179, 71, 0.1);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+        
+        .footer-logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            color: var(--milky-white);
+        }
+        
+        .footer-contact {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-contact i {
+            color: var(--star-yellow);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .footer-links h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--milky-white);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(248, 249, 250, 0.7);
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--star-yellow);
+        }
+        
+        .footer-links a i {
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(248, 249, 250, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--star-yellow);
+                font-size: 24px;
+                cursor: pointer;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .time-slot {
+                writing-mode: vertical-rl;
+                transform: rotate(180deg);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .legend {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909553.png" alt="Логотип Галактика семьи">
+                    <div class="logo-text">ГАЛАКТИКА <span>СЕМЬИ</span></div>
+                </div>
+                <nav>
+                    <button class="menu-toggle">☰</button>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="registration.html">Регистрация</a></li>
+                        <li><a href="account.html">Кабинет</a></li>
+                        <li><a href="schedule.html">Расписание</a></li>
+                        <li><a href="competition.html">Конкурсы</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой-секция -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Расписание мероприятий</h1>
+                <p class="hero-subtitle">Планируйте своё участие в конкурсах и мастер-классах. Выбирайте удобное время и присоединяйтесь к космическому приключению!</p>
+                <div>
+                    <a href="registration.html" class="btn">Зарегистрироваться</a>
+                    <a href="competition.html" class="btn btn-outline">Все конкурсы</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основное содержимое -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Расписание на 8 июля 2025</h2>
+            
+            <!-- Легенда -->
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color free"></div>
+                    <span>Много мест</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color low"></div>
+                    <span>Мало мест</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color full"></div>
+                    <span>Нет мест</span>
+                </div>
+            </div>
+            
+            <!-- Таблица расписания -->
+            <div class="schedule-container">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Время</th>
+                            <th>Сцена 1</th>
+                            <th>Сцена 2</th>
+                            <th>Сцена 3</th>
+                            <th>Детская зона</th>
+                            <th>Мастер-классы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="time-slot">10:00-11:00</td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Открытие фестиваля</div>
+                                    <div class="places-available free">15+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Фотосессия</div>
+                                    <div class="places-available low">3</div>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Рисование</div>
+                                    <div class="places-available free">10+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Гончарное дело</div>
+                                    <div class="places-available low">2</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">11:00-12:00</td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Танцевальный баттл</div>
+                                    <div class="places-available free">8</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Вокал</div>
+                                    <div class="places-available full">0</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Поэзия</div>
+                                    <div class="places-available free">5+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Лепка</div>
+                                    <div class="places-available free">12+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Флористика</div>
+                                    <div class="places-available low">1</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">12:00-13:00</td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Кулинарный конкурс</div>
+                                    <div class="places-available low">4</div>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Театр миниатюр</div>
+                                    <div class="places-available free">7+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Аппликации</div>
+                                    <div class="places-available free">15+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Роспись по дереву</div>
+                                    <div class="places-available full">0</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">13:00-14:00</td>
+                            <td colspan="5" style="text-align: center; font-family: 'Orbitron', sans-serif; font-weight: bold; color: var(--star-yellow); padding: 20px;">
+                                Обеденный перерыв
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">14:00-15:00</td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Семейная викторина</div>
+                                    <div class="places-available free">10+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Фотоконкурс</div>
+                                    <div class="places-available low">2</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Рукоделие</div>
+                                    <div class="places-available free">6+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Конструирование</div>
+                                    <div class="places-available free">12+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Мыловарение</div>
+                                    <div class="places-available full">0</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">15:00-16:00</td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Танцы народов мира</div>
+                                    <div class="places-available free">8+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Музыкальные дуэты</div>
+                                    <div class="places-available low">3</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Сказочники</div>
+                                    <div class="places-available free">5+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Оригами</div>
+                                    <div class="places-available free">10+</div>
+                                </div>
+                            </td>
+                            <td class="competition-cell">
+                                <div class="competition-info">
+                                    <div class="competition-name">Рисование песком</div>
+                                    <div class="places-available low">1</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">16:00-17:00</td>
+                            <td colspan="5" style="text-align: center; font-family: 'Orbitron', sans-serif; font-weight: bold; color: var(--star-yellow); padding: 20px;">
+                                Награждение победителей
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал сайта -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2909/2909553.png" alt="Логотип Галактика семьи">
+                        <div class="footer-logo-text">ГАЛАКТИКА СЕМЬИ</div>
+                    </div>
+                    <div class="footer-contact">
+                        <i>📞</i> <a href="tel:+74842234567">+7 (484) 223-45-67</a>
+                    </div>
+                    <div class="footer-contact">
+                        <i>✉️</i> <a href="mailto:info@galaxy-family.ru">info@galaxy-family.ru</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html"><i>🏠</i> Главная</a></li>
+                        <li><a href="registration.html"><i>📝</i> Регистрация</a></li>
+                        <li><a href="account.html"><i>👤</i> Личный кабинет</a></li>
+                        <li><a href="schedule.html"><i>📅</i> Расписание</a></li>
+                        <li><a href="competition.html"><i>🏆</i> Конкурсы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="#"><i>📍</i> Москва, ул. Космонавтов, 15</a></li>
+                        <li><a href="#"><i>🕒</i> Пн-Пт: 10:00 - 19:00</a></li>
+                        <li><a href="#"><i>📱</i> Мы в соцсетях</a></li>
+                        <li><a href="404.html"><i>❓</i> Помощь</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Галактика семьи. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            const nav = document.querySelector('nav ul');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Адаптация меню при изменении размера окна
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                document.querySelector('nav ul').style.display = 'flex';
+            } else {
+                document.querySelector('nav ul').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

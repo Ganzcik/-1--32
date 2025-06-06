@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Космический рисунок | Галактика семьи</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-blue: #0a1a2e;
+            --deep-space: #061a33;
+            --cosmic-purple: #4e2a84;
+            --star-yellow: #ffb347;
+            --nebula-pink: #ff6b6b;
+            --milky-white: #f8f9fa;
+            --comet-gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--space-blue);
+            color: var(--milky-white);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(78, 42, 132, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 179, 71, 0.15) 0%, transparent 20%);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--star-yellow);
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: rgba(10, 26, 46, 0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 179, 71, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: 50px;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--milky-white);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .logo-text span {
+            color: var(--star-yellow);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav ul li a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--star-yellow);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* Основное содержимое */
+        .competition-section {
+            padding: 80px 0;
+        }
+        
+        .competition-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .competition-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--milky-white);
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--star-yellow), var(--nebula-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 179, 71, 0.3);
+        }
+        
+        .competition-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 179, 71, 0.2);
+        }
+        
+        .competition-content {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .competition-main {
+            flex: 2;
+        }
+        
+        .competition-description {
+            margin-bottom: 30px;
+            color: rgba(248, 249, 250, 0.8);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .competition-sidebar {
+            flex: 1;
+        }
+        
+        .competition-info {
+            background: rgba(10, 26, 46, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 179, 71, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .info-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--milky-white);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 179, 71, 0.2);
+        }
+        
+        .info-item {
+            margin-bottom: 15px;
+        }
+        
+        .info-label {
+            color: var(--star-yellow);
+            margin-bottom: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+        
+        .info-value {
+            color: var(--milky-white);
+            font-weight: 500;
+        }
+        
+        .rating-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .rating-stars {
+            color: var(--star-yellow);
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        
+        .rating-value {
+            font-weight: bold;
+        }
+        
+        .participants-count {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .participants-icon {
+            font-size: 20px;
+            margin-right: 10px;
+            color: var(--star-yellow);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--star-yellow), var(--nebula-pink));
+            color: var(--space-blue);
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 179, 71, 0.3);
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 179, 71, 0.4);
+        }
+        
+        /* Подвал сайта */
+        footer {
+            background-color: var(--deep-space);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 179, 71, 0.1);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+        
+        .footer-logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            color: var(--milky-white);
+        }
+        
+        .footer-contact {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-contact i {
+            color: var(--star-yellow);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .footer-links h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--milky-white);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(248, 249, 250, 0.7);
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--star-yellow);
+        }
+        
+        .footer-links a i {
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(248, 249, 250, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .competition-content {
+                flex-direction: column;
+            }
+            
+            .competition-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--star-yellow);
+                font-size: 24px;
+                cursor: pointer;
+            }
+            
+            .competition-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .competition-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909553.png" alt="Логотип Галактика семьи">
+                    <div class="logo-text">ГАЛАКТИКА <span>СЕМЬИ</span></div>
+                </div>
+                <nav>
+                    <button class="menu-toggle">☰</button>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="registration.html">Регистрация</a></li>
+                        <li><a href="account.html">Личный кабинет</a></li>
+                        <li><a href="schedule.html">Расписание</a></li>
+                        <li><a href="competition.html">Конкурсы</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <section class="competition-section">
+        <div class="container">
+            <div class="competition-header">
+                <h1 class="competition-title">Космический рисунок</h1>
+                <img src="https://cdn.culture.ru/images/ca684bf8-1e32-5eb5-8c0e-8c28efcbc35e" alt="Космический рисунок" class="competition-image">
+            </div>
+            
+            <div class="competition-content">
+                <div class="competition-main">
+                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--milky-white); margin-bottom: 20px;">Описание конкурса</h2>
+                    <p class="competition-description">
+                        Конкурс "Космический рисунок" - это прекрасная возможность для всей семьи проявить свои творческие способности и вместе создать уникальное произведение искусства. Нарисуйте свою версию космоса: это может быть наша солнечная система, далекие галактики, космические корабли или фантастические миры - все, что подскажет ваше воображение!
+                    </p>
+                    <p class="competition-description">
+                        Мы приветствуем любые техники исполнения: акварель, гуашь, карандаши, фломастеры или даже цифровое искусство. Главное - чтобы работа была выполнена совместно всеми членами семьи. Для участия необходимо загрузить фотографию вашего рисунка через личный кабинет и заполнить краткое описание работы.
+                    </p>
+                    <p class="competition-description">
+                        Конкурс проводится в трех возрастных категориях: 3-6 лет, 7-12 лет и 13+. Победители будут определяться по следующим критериям: оригинальность идеи, качество исполнения, совместное участие всех членов семьи. Лучшие работы будут выставлены на нашей онлайн-галерее и получат призы от наших партнеров.
+                    </p>
+                </div>
+                
+                <div class="competition-sidebar">
+                    <div class="competition-info">
+                        <h3 class="info-title">Информация о конкурсе</h3>
+                        <div class="info-item">
+                            <div class="info-label">Дата проведения:</div>
+                            <div class="info-value">8 июля 2024 года</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Время:</div>
+                            <div class="info-value">10:00 - 18:00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Место:</div>
+                            <div class="info-value">Онлайн</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Возрастные группы:</div>
+                            <div class="info-value">3-6 лет, 7-12 лет, 13+</div>
+                        </div>
+                    </div>
+                    
+                    <div class="competition-info">
+                        <h3 class="info-title">Участие</h3>
+                        <div class="rating-container">
+                            <span class="rating-stars">★★★★☆</span>
+                            <span class="rating-value">4.5/5</span>
+                        </div>
+                        <div class="participants-count">
+                            <span class="participants-icon">👨‍👩‍👧‍👦</span>
+                            <span class="info-value">124 семьи участвуют</span>
+                        </div>
+                        <a href="account.html" class="btn">Участвовать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал сайта -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2909/2909553.png" alt="Логотип Галактика семьи">
+                        <div class="footer-logo-text">ГАЛАКТИКА СЕМЬИ</div>
+                    </div>
+                    <div class="footer-contact">
+                        <i>📞</i> <a href="tel:+74842234567">+7 (484) 223-45-67</a>
+                    </div>
+                    <div class="footer-contact">
+                        <i>✉️</i> <a href="mailto:info@galaxy-family.ru">info@galaxy-family.ru</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html"><i>🏠</i> Главная</a></li>
+                        <li><a href="registration.html"><i>📝</i> Регистрация</a></li>
+                        <li><a href="account.html"><i>👤</i> Личный кабинет</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Мероприятия</h3>
+                    <ul>
+                        <li><a href="schedule.html"><i>📅</i> Расписание</a></li>
+                        <li><a href="competition.html"><i>🏆</i> Конкурсы</a></li>
+                        <li><a href="404.html"><i>❓</i> Помощь</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Галактика семьи. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            const nav = document.querySelector('nav ul');
+            nav.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

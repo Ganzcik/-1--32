@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница не найдена | Галактика семьи</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-blue: #0a1a2e;
+            --deep-space: #061a33;
+            --cosmic-purple: #4e2a84;
+            --star-yellow: #ffb347;
+            --nebula-pink: #ff6b6b;
+            --milky-white: #f8f9fa;
+            --comet-gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--space-blue);
+            color: var(--milky-white);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(78, 42, 132, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 179, 71, 0.15) 0%, transparent 20%);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--star-yellow);
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: rgba(10, 26, 46, 0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 179, 71, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: 50px;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--milky-white);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .logo-text span {
+            color: var(--star-yellow);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav ul li a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--star-yellow);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* Основное содержимое */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .error-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .error-code {
+            font-size: 120px;
+            font-weight: bold;
+            color: var(--star-yellow);
+            margin-bottom: 20px;
+            line-height: 1;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(255, 179, 71, 0.3);
+        }
+        
+        .error-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--milky-white);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .error-description {
+            font-size: 18px;
+            color: rgba(248, 249, 250, 0.8);
+            margin-bottom: 40px;
+        }
+        
+        .error-image {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            background-color: rgba(10, 26, 46, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px solid var(--star-yellow);
+            box-shadow: 0 0 20px rgba(255, 179, 71, 0.3);
+        }
+        
+        .error-image img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+        
+        .home-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--star-yellow), var(--nebula-pink));
+            color: var(--space-blue);
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 179, 71, 0.3);
+        }
+        
+        .home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 179, 71, 0.4);
+        }
+        
+        /* Подвал сайта */
+        footer {
+            background-color: var(--deep-space);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 179, 71, 0.1);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+        
+        .footer-logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            color: var(--milky-white);
+        }
+        
+        .footer-contact {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-contact i {
+            color: var(--star-yellow);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .footer-links h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--milky-white);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(248, 249, 250, 0.7);
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--star-yellow);
+        }
+        
+        .footer-links a i {
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(248, 249, 250, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .error-code {
+                font-size: 100px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--star-yellow);
+                font-size: 24px;
+                cursor: pointer;
+            }
+            
+            .error-code {
+                font-size: 80px;
+            }
+            
+            .error-title {
+                font-size: 26px;
+            }
+            
+            .error-description {
+                font-size: 16px;
+            }
+            
+            .error-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909553.png" alt="Логотип Галактика семьи">
+                    <div class="logo-text">ГАЛАКТИКА <span>СЕМЬИ</span></div>
+                </div>
+                <nav>
+                    <button class="menu-toggle">☰</button>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="registration.html">Регистрация</a></li>
+                        <li><a href="account.html">Кабинет</a></li>
+                        <li><a href="schedule.html">Расписание</a></li>
+                        <li><a href="competition.html">Конкурсы</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="error-container">
+                <div class="error-image">
+                    <img src="https://a.d-cd.net/9089ef1s-1920.jpg" alt="Ошибка 404">
+                </div>
+                <h1 class="error-code">404</h1>
+                <h2 class="error-title">Страница не найдена</h2>
+                <p class="error-description">Извините, но страница, которую вы ищете, не существует. Возможно, она была перемещена или удалена.</p>
+                <a href="index.html" class="home-button">На главную</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2909/2909553.png" alt="Логотип Галактика семьи">
+                        <div class="footer-logo-text">ГАЛАКТИКА СЕМЬИ</div>
+                    </div>
+                    <div class="footer-contact">
+                        <i>📞</i> <a href="tel:+74842234567">+7 (484) 223-45-67</a>
+                    </div>
+                    <div class="footer-contact">
+                        <i>✉️</i> <a href="mailto:info@galaxy-family.ru">info@galaxy-family.ru</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html"><i>🏠</i> Главная</a></li>
+                        <li><a href="registration.html"><i>📝</i> Регистрация</a></li>
+                        <li><a href="account.html"><i>👤</i> Личный кабинет</a></li>
+                        <li><a href="schedule.html"><i>📅</i> Расписание</a></li>
+                        <li><a href="competition.html"><i>🏆</i> Конкурсы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="#"><i>📍</i> Москва, ул. Космонавтов, 15</a></li>
+                        <li><a href="#"><i>🕒</i> Пн-Пт: 10:00 - 19:00</a></li>
+                        <li><a href="#"><i>📱</i> Мы в соцсетях</a></li>
+                        <li><a href="404.html"><i>❓</i> Помощь</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Галактика семьи. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            const nav = document.querySelector('nav ul');
+            nav.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

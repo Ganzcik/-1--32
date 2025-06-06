@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | Галактика семьи</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-blue: #0a1a2e;
+            --deep-space: #061a33;
+            --cosmic-purple: #4e2a84;
+            --star-yellow: #ffb347;
+            --nebula-pink: #ff6b6b;
+            --milky-white: #f8f9fa;
+            --comet-gray: #6c757d;
+            --astral-blue: #1a73e8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--space-blue);
+            color: var(--milky-white);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(26, 115, 232, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 179, 71, 0.1) 0%, transparent 20%);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--astral-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта - минималистичная */
+        header {
+            background-color: transparent;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--milky-white);
+            letter-spacing: 1px;
+        }
+        
+        /* Основное содержимое */
+        .registration-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 100px);
+            padding: 40px 0;
+        }
+        
+        .registration-container {
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .registration-title {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .registration-title h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: var(--milky-white);
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--astral-blue), var(--star-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .registration-title p {
+            color: rgba(248, 249, 250, 0.7);
+            font-size: 1rem;
+        }
+        
+        /* Карточка формы */
+        .registration-card {
+            background: rgba(10, 26, 46, 0.8);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .registration-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(26, 115, 232, 0.1) 0%, transparent 70%) no-repeat,
+                radial-gradient(circle, rgba(255, 179, 71, 0.1) 0%, transparent 70%) no-repeat;
+            background-position: 20% 30%, 80% 70%;
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Стили формы */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(248, 249, 250, 0.9);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: rgba(6, 26, 51, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--milky-white);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--astral-blue);
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+        }
+        
+        /* Группа полов */
+        .gender-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .gender-option {
+            flex: 1;
+        }
+        
+        .gender-option input {
+            display: none;
+        }
+        
+        .gender-option label {
+            display: block;
+            padding: 12px;
+            background-color: rgba(6, 26, 51, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gender-option input:checked + label {
+            background-color: var(--astral-blue);
+            border-color: var(--astral-blue);
+            color: white;
+        }
+        
+        /* Загрузка файла */
+        .file-upload-container {
+            margin-top: 10px;
+        }
+        
+        .file-upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background-color: rgba(6, 26, 51, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .file-upload-label:hover {
+            border-color: var(--astral-blue);
+            background-color: rgba(26, 115, 232, 0.1);
+        }
+        
+        .file-upload-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: var(--astral-blue);
+        }
+        
+        .file-upload-text {
+            font-size: 0.9rem;
+            color: rgba(248, 249, 250, 0.7);
+        }
+        
+        /* Члены семьи */
+        .family-members-title {
+            margin: 30px 0 15px;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--milky-white);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .family-members-title::before, 
+        .family-members-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 15px;
+        }
+        
+        .family-member {
+            background-color: rgba(6, 26, 51, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .remove-member {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--nebula-pink);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .remove-member:hover {
+            background-color: #ff4757;
+            transform: rotate(90deg);
+        }
+        
+        .add-member-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: transparent;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: var(--astral-blue);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .add-member-btn:hover {
+            border-color: var(--astral-blue);
+            background-color: rgba(26, 115, 232, 0.1);
+        }
+        
+        /* Чекбокс согласия */
+        .agree-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin: 25px 0;
+        }
+        
+        .agree-checkbox input {
+            margin-right: 12px;
+            margin-top: 3px;
+        }
+        
+        .agree-checkbox label {
+            font-size: 0.9rem;
+            color: rgba(248, 249, 250, 0.8);
+            line-height: 1.5;
+        }
+        
+        .agree-checkbox a {
+            color: var(--astral-blue);
+            text-decoration: underline;
+        }
+        
+        /* Кнопка отправки */
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to right, var(--astral-blue), #3a86ff);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.4);
+        }
+        
+        /* Сообщения об ошибках */
+        .error-message {
+            color: var(--nebula-pink);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-group.error .form-input {
+            border-color: var(--nebula-pink);
+        }
+        
+        .form-group.error .error-message {
+            display: block;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: var(--deep-space);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-text {
+            color: rgba(248, 249, 250, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .registration-card {
+                padding: 30px;
+            }
+            
+            .gender-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .registration-title h1 {
+                font-size: 1.8rem;
+            }
+            
+            .registration-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909553.png" alt="Логотип Галактика семьи">
+                    <div class="logo-text">Галактика семьи</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <section class="registration-section">
+        <div class="container">
+            <div class="registration-container">
+                <div class="registration-title">
+                    <h1>Создайте аккаунт</h1>
+                    <p>Присоединяйтесь к нашему космическому сообществу</p>
+                </div>
+                
+                <div class="registration-card">
+                    <form>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" class="form-input" placeholder="your@email.com" required>
+                            <div class="error-message">Пожалуйста, введите корректный email</div>
+                        </div>
+                        
+                        <div class="form-row" style="display: flex; gap: 20px;">
+                            <div class="form-group" style="flex: 1;">
+                                <label for="first-name" class="form-label">Имя</label>
+                                <input type="text" id="first-name" class="form-input" placeholder="Иван" required>
+                                <div class="error-message">Пожалуйста, введите ваше имя</div>
+                            </div>
+                            
+                            <div class="form-group" style="flex: 1;">
+                                <label for="last-name" class="form-label">Фамилия</label>
+                                <input type="text" id="last-name" class="form-input" placeholder="Иванов" required>
+                                <div class="error-message">Пожалуйста, введите вашу фамилию</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Возраст</label>
+                            <input type="number" id="age" class="form-input" min="1" max="120" placeholder="30" required>
+                            <div class="error-message">Пожалуйста, укажите ваш возраст</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Пол</label>
+                            <div class="gender-group">
+                                <div class="gender-option">
+                                    <input type="radio" id="male" name="gender" value="male" required>
+                                    <label for="male">Мужской</label>
+                                </div>
+                                <div class="gender-option">
+                                    <input type="radio" id="female" name="gender" value="female">
+                                    <label for="female">Женский</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row" style="display: flex; gap: 20px;">
+                            <div class="form-group" style="flex: 1;">
+                                <label for="password" class="form-label">Пароль</label>
+                                <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                                <div class="error-message">Пароль должен содержать не менее 8 символов</div>
+                            </div>
+                            
+                            <div class="form-group" style="flex: 1;">
+                                <label for="confirm-password" class="form-label">Подтвердите пароль</label>
+                                <input type="password" id="confirm-password" class="form-input" placeholder="••••••••" required>
+                                <div class="error-message">Пароли не совпадают</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Семейная фотография</label>
+                            <div class="file-upload-container">
+                                <label for="family-photo" class="file-upload-label">
+                                    <div class="file-upload-icon">📷</div>
+                                    <div class="file-upload-text">Перетащите фото сюда или нажмите для загрузки</div>
+                                    <input type="file" id="family-photo" accept="image/*" style="display: none;" required>
+                                </label>
+                            </div>
+                            <div class="error-message">Пожалуйста, загрузите фотографию</div>
+                        </div>
+                        
+                        <h3 class="family-members-title">Члены семьи</h3>
+                        
+                        <div id="family-members">
+                            <div class="family-member">
+                                <button type="button" class="remove-member">✕</button>
+                                <div class="form-row" style="display: flex; gap: 20px; margin-bottom: 15px;">
+                                    <div class="form-group" style="flex: 1;">
+                                        <label class="form-label">Фамилия</label>
+                                        <input type="text" class="form-input" placeholder="Фамилия">
+                                    </div>
+                                    <div class="form-group" style="flex: 1;">
+                                        <label class="form-label">Имя</label>
+                                        <input type="text" class="form-input" placeholder="Имя">
+                                    </div>
+                                </div>
+                                <div class="form-row" style="display: flex; gap: 20px;">
+                                    <div class="form-group" style="flex: 1;">
+                                        <label class="form-label">Возраст</label>
+                                        <input type="number" class="form-input" min="1" max="120" placeholder="Возраст">
+                                    </div>
+                                    <div class="form-group" style="flex: 1;">
+                                        <label class="form-label">Пол</label>
+                                        <select class="form-input">
+                                            <option value="">Выберите пол</option>
+                                            <option value="male">Мужской</option>
+                                            <option value="female">Женский</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="add-member-btn">
+                            <span>+</span> Добавить члена семьи
+                        </button>
+                        
+                        <div class="agree-checkbox">
+                            <input type="checkbox" id="agree" required>
+                            <label for="agree">Я согласен(на) с <a href="#">условиями обработки</a> персональных данных и <a href="#">правилами</a> сайта</label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Зарегистрироваться</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал сайта -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2025 Галактика семьи. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
