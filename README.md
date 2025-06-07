@@ -1,5 +1,4 @@
 Производственная практика верстка 1ИСП-32 Епанчинцев. Полностью размещенные готовые файлы заданий.
-
 <title>Задания по неделям практика</title> <style> :root { --primary-color: #2c3e50; --secondary-color: #34495e; --accent-color: #3498db; --text-color: #333; --light-gray: #f5f5f5; --border-radius: 4px; }
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
